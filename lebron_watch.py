@@ -17,6 +17,9 @@ def main(twitter=False, website=False):
 
 def check_website():
 
+    delay = 5
+    print "Checking website every {} seconds".format(delay)
+
     previous_response = None
     tries = 0
 
@@ -28,7 +31,8 @@ def check_website():
             previous_response = r.text
 
         if r.text == previous_response:
-            time.sleep(3)  # wait before we try again
+            print "."
+            time.sleep(delay)
             continue
         
         else:  # WEBSITE HAS CHANGED
@@ -39,6 +43,9 @@ def check_website():
                 print "\a\a"
 
 def check_twitter():
+
+    delay = 10
+    print "Checking twitter every {} seconds".fromat(delay)
 
     previous_tweet = None
     tries = 0
@@ -55,7 +62,8 @@ def check_twitter():
             previous_tweet = latest_tweet_text
 
         if latest_tweet_text == previous_tweet:
-            time.sleep(10)
+            print "."
+            time.sleep(delay)
             continue
 
         else:  # NEW TWEET
