@@ -1,13 +1,18 @@
+import re
+import sys
+import time
+from datetime import datetime
+
+
 import requests
 from BeautifulSoup import BeautifulSoup
 
-import time
-from datetime import datetime
-import re
+def main(twitter=False, website=False):
+    if website:
+        check_website()
 
-def main():
-    check_website()
-    # check_twitter()
+    if twitter:
+        check_twitter()
 
 
 def check_website():
@@ -63,4 +68,10 @@ def check_twitter():
 
 
 if __name__ == '__main__':
-    main()
+
+    if "-t" in sys.argv or "--twitter" in sys.argv:
+        main(twitter=True)
+    elif "-w" in sys.argv or "--website" in sys.argv:
+        main(website=True)
+    else:
+        print "What would you like to check? Either his website (`-w` or `--website`) or his twitter (`-t` or `--twitter`)"
