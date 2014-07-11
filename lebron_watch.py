@@ -22,14 +22,14 @@ def check_website():
         if tries == 1:
             previous_response = r.text
 
-        print re.search(r"<title>([\w ]+)</title>", r.text).groups()[0]
-
         if r.text == previous_response:
             time.sleep(3)  # wait before we try again
             continue
-        else:
+        
+        else:  # WEBSITE HAS CHANGED
             previous_response = r.text
             print "Website changed at {now}".format(now=datetime.now())
+            print re.search(r"<title>([\w ]+)</title>", r.text).groups()[0]
             while True:
                 print "\a\a"
 
@@ -46,8 +46,6 @@ def check_twitter():
         latest_tweet = soup.findAll("div", "ProfileTweet")[0]
         latest_tweet_text = latest_tweet.find("p", "ProfileTweet-text")
 
-        print latest_tweet_text
-
         if tries == 1:
             previous_tweet = latest_tweet_text
 
@@ -55,9 +53,10 @@ def check_twitter():
             time.sleep(10)
             continue
 
-        else:
+        else:  # NEW TWEET
             previous_tweet = latest_tweet_text
-            print "New Tweet found at {now}".format(now=datetime.now())            
+            print "New Tweet found at {now}".format(now=datetime.now())
+            print latest_tweet_text           
             while True:
                 print "\a\a"
 
