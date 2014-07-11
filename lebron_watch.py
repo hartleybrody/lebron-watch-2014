@@ -45,7 +45,7 @@ def check_website():
 def check_twitter():
 
     delay = 10
-    print "Checking twitter every {} seconds".fromat(delay)
+    print "Checking twitter every {} seconds".format(delay)
 
     previous_tweet = None
     tries = 0
